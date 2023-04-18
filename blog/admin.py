@@ -1,6 +1,6 @@
 from django.contrib import admin
 from markdownx.admin import MarkdownxModelAdmin
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Comment
 
 admin.site.register(Post)
 
@@ -11,6 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, MarkdownxModelAdmin)
+admin.site.register(Comment)
 
 
 class TagAdmin(admin.ModelAdmin):
