@@ -7,7 +7,7 @@ from .models import Post, Category, Tag
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'head_image', 'file_upload', 'category', 'tag']
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category', 'tag']
 
     template_name = 'blog/post_updated.html'
 
@@ -20,7 +20,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'head_image', 'file_upload', 'category', 'tag']
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category', 'tag']
 
     def test_func(self):
         return self.request.user.is_staff or self.request.user.is_superuser
@@ -36,7 +36,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PostCreate, self).get_context_data()
         context['categories'] = Category.objects.all()
-        context['no_category_count'] = Post.objects.filter(categoty=None).count()
+        context['no_category_count'] = Post.objects.filter(category=None).count()
 
         return context
 
